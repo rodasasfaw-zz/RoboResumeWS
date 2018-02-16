@@ -1,4 +1,6 @@
-package com.roboresumews.project.Security;
+package com.roboresumews.project.Model;
+
+import com.roboresumews.project.Model.User;
 
 import javax.persistence.*;
 import java.util.Collection;

@@ -2,16 +2,13 @@ package com.roboresumews.project.Controller;
 
 import com.roboresumews.project.Model.*;
 import com.roboresumews.project.Repository.*;
-import com.roboresumews.project.Security.UserRepository;
 import com.roboresumews.project.Security.UserService;
+import org.apache.tomcat.jni.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -19,6 +16,7 @@ import javax.validation.Valid;
 public class HomeController {
     @Autowired
     UserService userService;
+
     @Autowired
     UserRepository userRepository;
 
@@ -32,6 +30,11 @@ public class HomeController {
     SkillsRepository skillsRepository;
     @Autowired
     ReferencesRepository referencesRepository;
+
+
+
+
+
 
     @RequestMapping("/")
     public String showindex() {
@@ -82,11 +85,12 @@ public class HomeController {
     }
 
     @PostMapping("/processexperience")
-    public String processExperience(@Valid @ModelAttribute("experience") Experience experiences, BindingResult result){
+    public String processExperience(@Valid @ModelAttribute("experience") Experience experiences, Model model,BindingResult result){
         if (result.hasErrors()){
             return "experienceform";
         }
         experienceRepository.save(experiences);
+        model.addAttribute("experience", experienceRepository.findAll());
         return "redirect:/";
 
     }
@@ -105,13 +109,13 @@ public class HomeController {
         return "redirect:/";
 
     }
-    @GetMapping("/addskills")
+    @GetMapping("/addreference")
     public String referenceForm(Model model) {
         model.addAttribute("reference", new References());
-        return "skillsform";
+        return "referenceform";
     }
 
-    @PostMapping("/processskills")
+    @PostMapping("/processsreference")
     public String processsReferences(@Valid @ModelAttribute("reference") References references, BindingResult result){
         if (result.hasErrors()){
             return "referenceform";
@@ -120,5 +124,74 @@ public class HomeController {
         return "redirect:/";
 
     }
+    @RequestMapping("/completeresume")
+    public String showComplete(Model model){
+        model.addAttribute("contactinfos", contactInformationRepository.findAll());
+        model.addAttribute("educations", educationRepository.findAll());
+        model.addAttribute("experiences",experienceRepository.findAll());
+        model.addAttribute("skillss",skillsRepository.findAll());
+        model.addAttribute("references",referencesRepository.findAll());
+
+        return "completeresume";
+    }
+    @RequestMapping("/showcover")
+    public String showCover(){
+
+        return "coverletter";
+    }
+    @RequestMapping("/updatecontact/{id}")
+    public String updatecontact(@PathVariable("id") long id, Model model){
+        model.addAttribute("contactinfos", contactInformationRepository.findOne(id));
+        return "redirect:/addcontactinfo";
+
+    }
+    @RequestMapping("/updateeducation/{id}")
+    public String updateeducation(@PathVariable("id") long id, Model model){
+        model.addAttribute("educations", educationRepository.findOne(id));
+        return "redirect:/addeducation";
+
+    }
+    @RequestMapping("/updateexperience/{id}")
+    public String updateExperience(@PathVariable("id") long id, Model model){
+        model.addAttribute("experiences", experienceRepository.findOne(id));
+        return "redirect:/addexperience";
+
+    }
+    @RequestMapping("/updateskill/{id}")
+    public String updateskill(@PathVariable("id") long id, Model model){
+        model.addAttribute("skillss", skillsRepository.findOne(id));
+        return "redirect:/addskills";
+
+    }
+    @RequestMapping("/updatereference/{id}")
+    public String update(@PathVariable("id") long id, Model model){
+        model.addAttribute("references", referencesRepository.findOne(id));
+        return "redirect:/addreference";
+
+    }
+    @GetMapping("/register")
+    public String showRegistrationPage(Model model){
+        model.addAttribute("user",new User());
+        return "registration";
+    }
+
+    @PostMapping("/register")
+    public String processregistration(@Valid @ModelAttribute("user")com.roboresumews.project.Model.User user, BindingResult result, Model model ){
+
+        model.addAttribute("user",user);
+        if(result.hasErrors()){
+            return "registration";
+        }else{
+            userService.saveUser(user);
+            model.addAttribute("message","User Account Successfully Created");
+        }
+        return "index";
+    }
+//    @RequestMapping("/delete/{id}")
+//    public String delBook(@PathVariable("id") long id){
+//        bookRepository.delete(id);
+//        return"redirect:/showbooklist";
+//    }
+
 }
 

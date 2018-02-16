@@ -9,15 +9,17 @@ import javax.persistence.Id;
 public class Experience {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String jobTitle;
 
-    public Experience() {
+
+    public long getId() {
+        return id;
     }
 
-    private String company;
-    private String duty;
-    private String beginyear;
-    private String endyear;
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getJobTitle() {
         return jobTitle;
@@ -59,11 +61,23 @@ public class Experience {
         this.endyear = endyear;
     }
 
-    public Experience(String company, String duty, String beginyear, String endyear) {
+    public Experience(long id, String company, String duty, String beginyear, String endyear) {
+        this.id = id;
         this.company = company;
         this.duty = duty;
         this.beginyear = beginyear;
         this.endyear = endyear;
 
     }
+
+    private String company;
+    private String duty;
+
+    public Experience() {
+    }
+
+    private String beginyear;
+    private String endyear;
+
+
 }

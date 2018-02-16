@@ -1,5 +1,6 @@
 package com.roboresumews.project.Security;
 
+import com.roboresumews.project.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -8,8 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.util.matcher.AndRequestMatcher;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -29,10 +28,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/login","/h2-console/**").permitAll()
+                .antMatchers("/login","/h2-console/**","/updat").permitAll()
                 .antMatchers("/")
                 .access("hasAuthority('USER') or hasAuthority('ADMIN')")
-                .antMatchers("/admin").access("hasAuthority('ADMIN')")
+                .antMatchers("/admin").access("hasAuthority('USER')")
                 .anyRequest()
                 .authenticated()
                 .and()

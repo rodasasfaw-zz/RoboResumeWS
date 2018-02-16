@@ -15,32 +15,31 @@
 </head>
 <body background="image/2560x1440-light-blue-solid-color-background.jpg">
 <div th:replace="index :: navlinks"></div>
-
 <div  class="centered">
-<form autocomplete="off" action="#" th:action="@{/processcontactinfo}"
-      th:object="${contactinfo}" method="post">
-    <span th:if="${#fields.hasErrors('firstName')}"
-          th:errors="*{firstName}">First Name:</span>
-    <input type="text" id="firstName" placeholder="firstName"
-           th:field="*{firstName}" /><br />
+<form autocomplete="off" action="#" th:action="@{/processsreference}"
+      th:object="${reference}" method="post">
+    <span th:if="${#fields.hasErrors('ref_firstName')}"
+          th:errors="*{ref_firstName}">First Name:</span>
+    <input type="text" id="ref_firstName" placeholder="ref_firstName"
+           th:field="*{ref_firstName}" /><br />
 
 
-    <span th:if="${#fields.hasErrors('lastName')}"
-          th:errors="*{lastName}">Last name:</span>
-    <input type="text" id="lastName" placeholder="lastName"
-           th:field="*{lastName}" /><br />
+    <span th:if="${#fields.hasErrors('ref_lastName')}"
+          th:errors="*{ref_lastName}">Last name:</span>
+    <input type="text" id="ref_lastName" placeholder="ref_lastName"
+           th:field="*{ref_lastName}" /><br />
 
-    <span th:if="${#fields.hasErrors('phoneNumber')}"
-          th:errors="*{phoneNumber}">Phone Number:</span>
-    <input type="number" id="phoeNumber" placeholder="phoneNumber"
-           th:field="*{phoneNumber}" /><br />
+    <span th:if="${#fields.hasErrors('ref_phoneNumber')}"
+          th:errors="*{ref_phoneNumber}">Phone Number:</span>
+    <input type="number" id="ref_phoeNumber" placeholder="ref_phoneNumber"
+           th:field="*{ref_phoneNumber}" /><br />
 
 
 
-    <span th:if="${#fields.hasErrors('email')}"
-          th:errors="*{email}">Email:</span>
-    <input type="email" id="" placeholder="email"
-           th:field="*{email}" /><br />
+    <span th:if="${#fields.hasErrors('ref_email')}"
+          th:errors="*{ref_email}">Email:</span>
+    <input type="ref_email" id="" placeholder="ref_email"
+           th:field="*{ref_email}" /><br />
 
 
     <button type="submit" class="btn btn-default">Submit</button>

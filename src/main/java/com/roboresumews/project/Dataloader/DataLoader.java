@@ -1,5 +1,9 @@
-package com.roboresumews.project.Security;
+package com.roboresumews.project.Dataloader;
 
+import com.roboresumews.project.Model.Role;
+import com.roboresumews.project.Model.User;
+import com.roboresumews.project.Repository.RoleRepository;
+import com.roboresumews.project.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
