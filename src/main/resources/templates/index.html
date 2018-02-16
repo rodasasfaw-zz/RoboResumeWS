@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -26,14 +26,14 @@
 
     <ul class="nav nav-tabs distance">
 
-        <li class="active"><a href="/showbooklist">Summary</a></li>
-        <li class="active"><a href="/addcontactinfo">Contact Information</a></li>
-        <li class="active"><a href="/addeducation">Education</a></li>
-        <li class="active"><a href="/addskills">Skills</a></li>
-        <li class="active"><a href="/addexperience">Experience</a></li>
-        <li class="active"><a href="/addreference">References</a></li>
+        <li sec:authorize="hasAuthority('USER')"  class="active"><a href="/showbooklist">Summary</a></li>
+        <li sec:authorize="hasAuthority('USER')" class="active"><a href="/addcontactinfo">Contact Information</a></li>
+        <li sec:authorize="hasAuthority('USER')"  class="active"><a href="/addeducation">Education</a></li>
+        <li sec:authorize="hasAuthority('USER')" class="active"><a href="/addskills">Skills</a></li>
+        <li sec:authorize="hasAuthority('USER')"  class="active"><a href="/addexperience">Experience</a></li>
+        <li sec:authorize="hasAuthority('USER')" class="active"><a href="/addreference">References</a></li>
         <li class="active"><a href="/completeresume">Complete Resume</a></li>
-        <li class="active"><a href="/returnbook">Cover letter</a></li>
+        <!--<li class="active"><a href="/returnbook">Cover letter</a></li>-->
 
 
     </ul>
