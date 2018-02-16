@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Experience</title>
+</head>
+<body>
+<form autocomplete="off" action="#" th:action="@{/processexperience}"
+      th:object="${experience}" method="post">
+    <span th:if="${#fields.hasErrors('jobTitle')}"
+          th:errors="*{jobTitle}">Job Title:</span>
+    <input type="text" id="jobTitle" placeholder="jobTitle"
+           th:field="*{jobTitle}" /><br />
+
+
+    <span th:if="${#fields.hasErrors('company')}"
+          th:errors="*{company}">Company:</span>
+    <input type="text" id="company" placeholder="company"
+           th:field="*{company}" /><br />
+
+    <span th:if="${#fields.hasErrors('duty')}"
+          th:errors="*{duty}">Duty:</span>
+    <input type="text" id="duty" placeholder="duty"
+           th:field="*{duty}" /><br />
+
+
+
+    <span th:if="${#fields.hasErrors('beginyear')}"
+          th:errors="*{beginyear}">Begin year:</span>
+    <input type="number" id="beginyear" placeholder="beginyear"
+           th:field="*{beginyear}" /><br />
+
+    <span th:if="${#fields.hasErrors('endyear')}"
+          th:errors="*{endyear}">year:</span>
+    <input type="number" id="" placeholder="endyear"
+           th:field="*{endyear}" /><br />
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</body>
+</html>

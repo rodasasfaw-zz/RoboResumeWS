@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Skills</title>
+</head>
+<body>
+<form autocomplete="off" action="#" th:action="@{/processskills}"
+      th:object="${skills}" method="post">
+    <span th:if="${#fields.hasErrors('skill')}"
+          th:errors="*{skill}">School:</span>
+    <input type="text" id="skill" placeholder="skill"
+           th:field="*{skill}" /><br />
+
+    <select th:field="*{rating}" name="rating">
+        <option value="beginner">beginner</option>
+        <option value="intermediate">intermediate</option>
+        <option value="proficient">proficient</option>
+    </select>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</body>
+</html>
