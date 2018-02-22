@@ -2,116 +2,116 @@ package com.roboresumews.project.Model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-
-    @Column(name = "email", nullable = false)
+    @Column(name="email",nullable = false)
     private String email;
-
-    @Column(name = "password")
+    @Column(name="password")
     private String password;
-
     @Column(name = "first_name")
     private String firstName;
-
-
     @Column(name = "last_name")
     private String lastName;
-
-    @Column(name="enabled")
+    @Column(name = "enabled")
     private boolean enabled;
-
-    @Column(name="username")
-    private String username;
-
-
+    @Column(name = "username")
+    private String userName;
 
     @ManyToMany(fetch = FetchType.EAGER)
-
+    @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-    public User() {
-    }
 
-    public User(String email, String password, String firstName, String lastName, boolean enabled, String username) {
+
+
+    public User(String email, String password, String firstName, String lastName, boolean enabled, String userName){
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+
         this.enabled = enabled;
-        this.username = username;
+
+        this.userName = userName;
+
     }
 
-
-
-    public String getFirstName() {
-        return firstName;
+    public User() {
+        this.roles= new HashSet<>();
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getFirstName() {
+        return firstName;
     }
-
-
 
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public String getUserName() {
+        return userName;
     }
 
     public Collection<Role> getRoles() {
         return roles;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public void addRole(Role r){
+        this.roles.add(r);
     }
 }

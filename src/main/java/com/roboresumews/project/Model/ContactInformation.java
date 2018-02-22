@@ -10,60 +10,58 @@ public class ContactInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String firstName;
-    private String lastName;
-    private int phoneNumber;
-
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    private String email;
+    private String infofirstName;
+    private String infolastName;
+    private long phoneNumber;
+    private String infoemail;
 
     public ContactInformation() {
     }
 
-    public ContactInformation(String firstName, String lastName, int phoneNumber, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public ContactInformation(String infofirstName, String infolastName, long phoneNumber, String infoemail) {
+        this.infofirstName = infofirstName;
+        this.infolastName = infolastName;
         this.phoneNumber = phoneNumber;
-        this.email = email;
+        this.infoemail = infoemail;
     }
 
     public long getId() {
         return id;
-
     }
 
     public void setId(long id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getInfofirstName() {
+        return infofirstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setInfofirstName(String infofirstName) {
+        this.infofirstName = infofirstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getInfolastName() {
+        return infolastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setInfolastName(String infolastName) {
+        this.infolastName = infolastName;
     }
 
-    public String getEmail() {
-        return email;
+    public long getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getInfoemail() {
+        return infoemail;
+    }
+
+    public void setInfoemail(String infoemail) {
+        this.infoemail = infoemail;
     }
 }

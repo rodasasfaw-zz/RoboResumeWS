@@ -31,11 +31,6 @@ public class HomeController {
     @Autowired
     ReferencesRepository referencesRepository;
 
-
-
-
-
-
     @RequestMapping("/")
     public String showindex() {
         return "index";
@@ -169,29 +164,27 @@ public class HomeController {
         return "redirect:/addreference";
 
     }
-//    @GetMapping("/register")
-//    public String showRegistrationPage(Model model){
-//        model.addAttribute("user",new User());
-//        return "registration";
-//    }
-//
-//    @PostMapping("/register")
-//    public String processregistration(@Valid @ModelAttribute("user") User user, BindingResult result, Model model ){
-//
-//        model.addAttribute("user",user);
-//        if(result.hasErrors()){
-//            return "registration";
-//        }else{
-//            userService.saveUser(user);
-//            model.addAttribute("message","User Account Successfully Created");
-//        }
-//        return "index";
-//    }
-//    @RequestMapping("/delete/{id}")
-//    public String delBook(@PathVariable("id") long id){
-//        bookRepository.delete(id);
-//        return"redirect:/showbooklist";
-//    }
+    @GetMapping("/register")
+    public String showRegistrationPage(Model model){
+        model.addAttribute("registration",new com.roboresumews.project.Model.User());
+        return "registration";
+    }
 
-}
+    @RequestMapping("/register")
+    public String registration(@Valid @ModelAttribute("user") com.roboresumews.project.Model.User user , BindingResult result, Model model) {
+
+        model.addAttribute("user", user);
+
+        if (result.hasErrors()) {
+            return "registration";
+        }
+
+        userService.saveUser(user);
+        model.addAttribute("message", "User account successfully created");
+
+        return "redirect:/";
+
+    }
+
+    }
 

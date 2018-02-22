@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Robo Resume</title>
@@ -21,10 +21,10 @@
 
 
 <div th:each="contactinfo : ${contactinfos}">
-    <span th:inline="text">[[${contactinfo.firstName}]]</span>  <span th:inline="text">[[${contactinfo.lastName}]]<br /></span>
+    <span th:inline="text">[[${contactinfo.infofirstName}]]</span>  <span th:inline="text">[[${contactinfo.infolastName}]]<br /></span>
     <span th:inline="text">[[${contactinfo.phoneNumber}]]<br/></span>
-    <span th:inline="text">[[${contactinfo.email}]]<br/></span>
-    <a th:href="@{/updatecontact/{id} (id=${contactinfo.id})}">Update contact</a>
+    <span th:inline="text">[[${contactinfo.infoemail}]]<br/></span>
+    <a sec:authorize="hasAuthority('USER')" th:href="@{/updatecontact/{id} (id=${contactinfo.id})}">Update contact</a>
 </div>
 <h1> Education</h1>
 
@@ -33,7 +33,7 @@
     <span th:inline="text">[[${education.level}]]<br/></span>
     <span th:inline="text">[[${education.department}]]<br/></span>
     <span th:inline="text">[[${education.year}]]<br/></span>
-    <a th:href="@{/updateeducation/{id} (id=${education.id})}">Update education</a>
+    <a sec:authorize="hasAuthority('USER')" th:href="@{/updateeducation/{id} (id=${education.id})}">Update education</a>
 </div>
 
 <h1 th:inline="text">Experience</h1>
@@ -42,26 +42,28 @@
 <span th:inline="text">[[${experience.company}]]<br/></span>
 <span th:inline="text">[[${experience.duty}]]<br/></span>
     <span th:inline="text">[[${experience.beginyear}]]</span> - <span th:inline="text">[[${experience.endyear}]]<br/></span>
-    <a th:href="@{/updateexperience/{id} (id=${experience.id})}">Update experience</a>
+    <a sec:authorize="hasAuthority('USER')" th:href="@{/updateexperience/{id} (id=${experience.id})}">Update experience</a>
 </div>
 
 
 <h1 th:inline="text">Skills</h1>
 <div th:each="skills : ${skillss}">
     <span th:inline="text">[[${skills.skill}]]</span> - <span th:inline="text">[[${skills.rating}]]<br/></span>
-    <a th:href="@{/updateskill/{id} (id=${skills.id})}">Update skill</a>
+    <a sec:authorize="hasAuthority('USER')" th:href="@{/updateskill/{id} (id=${skills.id})}">Update skill</a>
 </div>
+    <div sec:authorize="hasAuthority('USER')">
 <h2>References</h2>
 <div th:each="reference : ${references}">
     <span th:inline="text">[[${reference.ref_firstName}]]</span>  <span th:inline="text">[[${reference.ref_lastName}]]<br /></span>
     <span th:inline="text">[[${reference.ref_phoneNumber}]]<br/></span>
     <span th:inline="text">[[${reference.ref_email}]]<br/></span>
-    <a th:href="@{/updatereference/{id} (id=${reference.id})}">Update reference</a>
+    <a sec:authorize="hasAuthority('USER')" th:href="@{/updatereference/{id} (id=${reference.id})}">Update reference</a>
 </div>
 
-<a href="/addeducation">add education</a><br />
+<a  href="/addeducation">add education</a><br />
 <a href="/addexperience">add experience</a><br />
 <a href="/addskills">add skill</a><br />
+</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

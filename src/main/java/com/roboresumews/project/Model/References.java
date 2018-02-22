@@ -43,11 +43,11 @@ public class References {
         this.ref_lastName = ref_lastName;
     }
 
-    public int getRef_phoneNumber() {
+    public long getRef_phoneNumber() {
         return ref_phoneNumber;
     }
 
-    public void setRef_phoneNumber(int ref_phoneNumber) {
+    public void setRef_phoneNumber(long ref_phoneNumber) {
         this.ref_phoneNumber = ref_phoneNumber;
     }
 
@@ -63,6 +63,6 @@ public class References {
 
     }
 
-    private int ref_phoneNumber;
+    private long ref_phoneNumber;
     private String ref_email;
 }
